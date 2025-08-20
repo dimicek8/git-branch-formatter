@@ -14,8 +14,8 @@
 MainWindow::MainWindow(int w, int h, const char *title) : Fl_Window(w, h, title) {
 #ifndef _WIN32
     std::string iconPath = std::string(RESOURCE_DIR) + "/resources/icon.png";
-    icon_ = new Fl_PNG_Image(iconPath.c_str());
-    this->icon(icon_);
+    app_icon_ = new Fl_PNG_Image(iconPath.c_str());
+    this->icon(app_icon_);
 #endif
 
     begin();
@@ -54,5 +54,8 @@ void MainWindow::onCopyClicked() {
 }
 
 MainWindow::~MainWindow() {
-    delete icon_;
+#ifndef _WIND32
+    delete app_icon_;
+    app_icon_ = nullptr;
+#endif
 }

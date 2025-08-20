@@ -21,7 +21,7 @@ private:
     Fl_Button* copy_ = nullptr;
 
 #ifndef _WIN32
-    Fl_PNG_Image* icon_ = nullptr;
+    Fl_PNG_Image* app_icon_ = nullptr;
 #endif
 
     void onInputChanged();
