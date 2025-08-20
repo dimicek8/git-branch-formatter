@@ -1,0 +1,30 @@
+# CLion / CMake
+cmake-build-*/
+build/
+CMakeFiles/
+CMakeCache.txt
+Testing/
+Makefile
+install_manifest.txt
+_compile_commands.json
+compile_commands.json
+CTestTestfile.cmake
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Windows artifacts
+*.exe
+*.pdb
+*.ilk
+*.obj
+*.lib
+*.dll
