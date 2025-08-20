@@ -20,7 +20,9 @@ private:
     Fl_Output* output_ = nullptr;
     Fl_Button* copy_ = nullptr;
 
+#ifndef _WIN32
     Fl_PNG_Image* icon_ = nullptr;
+#endif
 
     void onInputChanged();
     void onCopyClicked();
