@@ -9,16 +9,21 @@ set(FLTK_SKIP_OPENGL TRUE)
 find_package(FLTK REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
-
 add_compile_definitions(RESOURCE_DIR="${CMAKE_SOURCE_DIR}")
 
 add_executable(BranchFormatter
         src/main.cpp
+        src/app/MainWindow.cpp
         src/core/sanitizer.cpp
-        src/app/MainWindow.cpp)
+)
 
 target_include_directories(BranchFormatter PRIVATE ${FLTK_INCLUDE_DIR})
 target_link_libraries(BranchFormatter PRIVATE
         ${FLTK_LIBRARIES}
         fltk_images
 )
+
+# Windows: statické linkování pro "single .exe"
+if (WIN32)
+    target_link_options(BranchFormatter PRIVATE -static -static-libgcc -static-libstdc++)
+endif()
