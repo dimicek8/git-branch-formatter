@@ -45,6 +45,20 @@ jobs:
           cp build/BranchFormatter.exe dist/
           cp -r resources dist/ || true
 
+      - name: Bundle runtime DLLs
+        run: |
+          echo "=== ldd output ==="
+          ldd build/BranchFormatter.exe
+          echo "=== copying mingw64 DLLs ==="
+          ldd build/BranchFormatter.exe | awk '/mingw64\/bin/ {print $3}' | while read -r f; do
+            [ -f "$f" ] && cp -u "$f" dist/
+          done
+
+      - name: Show dist contents
+        run: |
+          echo "=== dist/ ==="
+          ls -al dist
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
