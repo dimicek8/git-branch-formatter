@@ -6,7 +6,9 @@
 
 #include <FL/fl_ask.H>
 #include <FL/Fl.H>
-#include <FL/Fl_PNG_Image.H>
+#ifndef _WIN32
+    #include <FL/Fl_PNG_Image.H>
+#endif
 
 #include <cstring>
 #include "core/sanitizer.h"
@@ -15,7 +17,9 @@ MainWindow::MainWindow(int w, int h, const char *title) : Fl_Window(w, h, title)
 #ifndef _WIN32
     std::string iconPath = std::string(RESOURCE_DIR) + "/resources/icon.png";
     app_icon_ = new Fl_PNG_Image(iconPath.c_str());
-    this->icon(app_icon_);
+    if (!app_icon_->fail()) {
+        this->icon(app_icon_);
+    }
 #endif
 
     begin();
@@ -54,7 +58,7 @@ void MainWindow::onCopyClicked() {
 }
 
 MainWindow::~MainWindow() {
-#ifndef _WIND32
+#if !defined(_WIN32)
     delete app_icon_;
     app_icon_ = nullptr;
 #endif
