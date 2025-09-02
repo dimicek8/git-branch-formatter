@@ -22,7 +22,7 @@ static std::string wstring_to_utf8(const std::wstring& ws) {
     return conv.to_bytes(ws);
 }
 
-static std::wstring strip_diacritics_and_symbols(std::wstring in) {
+static std::wstring strip_diacritics_and_symbols(const std::wstring& in) {
     std::wstring out;
     out.reserve(in.size());
 
@@ -107,6 +107,9 @@ std::string sanitize(const std::string_view sv_input) {
 
     static const std::regex re_multiple_dashes("-{2,}");
     s = std::regex_replace(s, re_multiple_dashes, "-");
+
+    static const std::regex re_brackets("[()\\[\\]{}]");
+    s = std::regex_replace(s, re_brackets, "-");
 
     std::replace(s.begin(), s.end(), '.', '-');
     std::replace(s.begin(), s.end(), ' ', '-');
